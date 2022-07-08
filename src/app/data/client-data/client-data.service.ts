@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Client, Gender } from '../../models/client.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, timeout } from 'rxjs';
 import { PaginationResponse } from '../../models/pagination-response.model';
 
-const mock = [
+const mock: Client[] = [
   {
     id: 1,
     firstName: 'Leo',
@@ -21,7 +21,7 @@ const mock = [
       city: 'Parn',
       address: 'city street'
     },
-    photo: null,
+    photo: undefined,
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const mock = [
       city: 'Parn',
       address: 'city street'
     },
-    photo: null,
+    photo: undefined,
   },
   {
     id: 3,
@@ -59,7 +59,7 @@ const mock = [
       city: 'Parn',
       address: 'city street'
     },
-    photo: null,
+    photo: undefined,
   }
 ];
 
@@ -75,13 +75,17 @@ export class ClientDataService {
   }
 
   findAllClient(params: any = {}): Observable<PaginationResponse<Client>> {
-    return of({
-      entities: mock,
-      pagination: {
-        pages: 1,
-        pageSize: 10,
-        currentPage: 1
-      }
+    return new Observable((subscriber) => {
+      setTimeout(() => {
+        subscriber.next({
+          entities: mock,
+          pagination: {
+            pages: 1,
+            pageSize: 10,
+            currentPage: 1
+          }
+        })
+      }, 100)
     });
   }
 }

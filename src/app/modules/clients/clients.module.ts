@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TableModule} from 'primeng/table';
 import { ClientsListComponent } from './clients-list/clients-list.component';
+import { PrimeModule } from '../prime/prime.module';
+import { ClientsComponent } from './clients.component';
+import { ClientsRoutingModule } from './clients-routing.module';
+import { ClientFormComponent } from './components/client-form/client-form.component';
 
 @NgModule({
   declarations: [
-    ClientsListComponent
+    ClientsListComponent,
+    ClientsComponent,
+    ClientFormComponent
   ],
   imports: [
     CommonModule,
-    TableModule,
+    PrimeModule,
+    ClientsRoutingModule
   ],
 })
 export class ClientsModule { }

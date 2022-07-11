@@ -15,6 +15,9 @@ export class ClientFormComponent implements OnInit {
   public client: Client;
   @Input()
   public readonly = false;
+  @Input()
+  public toggable = false;
+
   public clientForm: FormGroup;
   public genderOptions = [
     {name: Gender.Male, value: Gender.Male,},
@@ -36,8 +39,6 @@ export class ClientFormComponent implements OnInit {
     if(!this.clientForm.valid) {
       return this.clientForm.markAllAsTouched();
     }
-    console.log(this.clientForm)
-    console.log(this.clientForm.value, this.clientForm.valid)
   }
 
   ngOnInit(): void {

@@ -24,6 +24,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   public errorMessage: string = '';
   @Input()
   public before: string = '';
+  @Input()
+  public readonly: boolean = false;
 
 
   control: NgControl;

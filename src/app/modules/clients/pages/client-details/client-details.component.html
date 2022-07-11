@@ -1,5 +1,26 @@
-<client-form
-  *ngIf="!isLoading"
-  [client]="currentClient"
-  [readonly]="true"
-></client-form>
+<div class="flex align-content-center justify-content-center">
+  <div class="col-10 align-content-center">
+    <p-panel header="Client details" [toggleable]="true">
+      <ng-template pTemplate="icons">
+        <button pButton class="p-panel-header-icon p-link">
+          <span class="pi pi-cog"></span>
+        </button>
+      </ng-template>
+      <client-form
+        *ngIf="!isLoading"
+        [client]="currentClient"
+        [readonly]="true"
+      ></client-form>
+    </p-panel>
+    <div class="pb-4"></div>
+    <p-panel header="Accounts" [toggleable]="true">
+      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
+      <p-divider></p-divider>
+      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
+      <p-divider></p-divider>
+      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
+      <p-divider></p-divider>
+      <tbc-account-form></tbc-account-form>
+    </p-panel>
+  </div>
+</div>

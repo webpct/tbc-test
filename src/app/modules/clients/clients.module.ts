@@ -11,6 +11,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { ClientDetailsComponent } from './pages/client-details/client-details.component';
+import { AccountFormComponent } from './components/account-form/account-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClientDetailsComponent } from './pages/client-details/client-details.co
     ClientsComponent,
     ClientFormComponent,
     CreateClientComponent,
-    ClientDetailsComponent
+    ClientDetailsComponent,
+    AccountFormComponent
   ],
   imports: [
     HttpClientModule,

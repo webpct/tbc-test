@@ -1,17 +1,16 @@
-<div class="flex align-content-center justify-content-center">
-  <div class="col-10 align-content-center">
-    <p-card [header]="title">
-      <form class="grid p-fluid" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+<form class="grid p-fluid" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
         <div class="col-12 md:col-6">
           <tbc-input
             label="First name"
             formControlName="firstName"
+            [readonly]="readonly"
             placeholder="First name"
             errorMessage="Only latin character and spaces allowed"
           ></tbc-input>
         </div>
         <div class="col-12 md:col-6">
           <tbc-input
+            [readonly]="readonly"
             label="Last name"
             formControlName="lastName"
             placeholder="Last name"
@@ -19,10 +18,8 @@
           ></tbc-input>
         </div>
         <div class="col-12 field">
-          <p-selectButton [options]="genderOptions" formControlName="gender" optionLabel="name" optionValue="value"></p-selectButton>
-        </div>
-        <div class="col-12 field">
           <tbc-input
+            [readonly]="readonly"
             type="number"
             label="Personal number"
             formControlName="personalNumber"
@@ -32,6 +29,7 @@
         </div>
         <div class="col-12 field">
           <tbc-input
+            [readonly]="readonly"
             before="+5"
             label="Mobile Number"
             formControlName="mobileNumber"
@@ -40,11 +38,22 @@
           >
           </tbc-input>
         </div>
+        <div class="col-12 field">
+          <h4 class="mb-3 mt-0">Gender</h4>
+          <p-dropdown
+            [options]="genderOptions"
+            formControlName="gender"
+            optionLabel="name"
+            optionValue="value"
+            [readonly]="readonly"
+          ></p-dropdown>
+        </div>
         <section formGroupName="legalAddress">
           <h4 class="col-12 mb-0 mt-0">Legal address</h4>
           <div class="flex">
             <div class="col-12 md:col-4 field">
               <tbc-input
+                [readonly]="readonly"
                 label="Country"
                 formControlName="country"
                 placeholder="Country"
@@ -53,6 +62,7 @@
             </div>
             <div class="col-12 md:col-4 field">
               <tbc-input
+                [readonly]="readonly"
                 label="City"
                 formControlName="city"
                 placeholder="City"
@@ -62,6 +72,7 @@
             <div class="col-12 md:col-4 field">
               <tbc-input
                 label="Address"
+                [readonly]="readonly"
                 formControlName="address"
                 placeholder="Address"
                 errorMessage="Required"
@@ -76,6 +87,7 @@
               <tbc-input
                 label="Country"
                 formControlName="country"
+                [readonly]="readonly"
                 placeholder="Country"
                 errorMessage="Required"
               >
@@ -86,6 +98,7 @@
                 label="City"
                 formControlName="city"
                 placeholder="City"
+                [readonly]="readonly"
                 errorMessage="Required"
               ></tbc-input>
             </div>
@@ -93,6 +106,7 @@
               <tbc-input
                 label="Address"
                 formControlName="address"
+                [readonly]="readonly"
                 placeholder="Address"
                 errorMessage="Required"
               ></tbc-input>
@@ -103,6 +117,3 @@
           <button pButton type="submit" label="Save"></button>
         </section>
       </form>
-    </p-card>
-  </div>
-</div>

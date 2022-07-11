@@ -7,8 +7,12 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FileUploadModule} from 'primeng/fileupload';
-import {PanelModule} from 'primeng/panel';
+import {ChipModule} from 'primeng/chip';
 import {CardModule} from 'primeng/card';
+import {DividerModule} from 'primeng/divider';
+import {PanelModule} from 'primeng/panel';
+import { TagModule } from 'primeng/tag';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -22,7 +26,12 @@ import {CardModule} from 'primeng/card';
     InputTextModule,
     SelectButtonModule,
     FileUploadModule,
-    CardModule
+    CardModule,
+    ChipModule,
+    DividerModule,
+    PanelModule,
+    TagModule,
+    DropdownModule
   ],
   exports: [
     ButtonModule,
@@ -32,7 +41,12 @@ import {CardModule} from 'primeng/card';
     InputTextModule,
     SelectButtonModule,
     FileUploadModule,
-    CardModule
+    CardModule,
+    ChipModule,
+    DividerModule,
+    PanelModule,
+    TagModule,
+    DropdownModule
   ]
 })
 export class PrimeModule { }

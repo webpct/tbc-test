@@ -1,21 +1,103 @@
-<tbc-button-link href="/clients/add" text="Add client"></tbc-button-link>
-<p-table [value]="clients" responsiveLayout="scroll">
+<p-table
+  [value]="clients"
+  dataKey="id"
+  [rowHover]="true"
+  [lazy]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10,25,50]"
+  (onLazyLoad)="loadClients($event)"
+  [loading]="loading" responsiveLayout="scroll"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} clients"
+  [filterDelay]="0"
+  [globalFilterFields]="['name','country.name','representative.name','status']"
+>
+  <ng-template pTemplate="caption">
+    <div class="table-header flex justify-content-between align-items-center">
+      <h2 class="mb-0 mt-0">Clients</h2>
+      <tbc-button-link href="/clients/add" text="Add client"></tbc-button-link>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Quantity</th>
+      <th pSortableColumn="personalNumber">
+        <div class="flex justify-content-between align-items-center">
+          Personal number
+          <p-sortIcon field="personalNumber"></p-sortIcon>
+          <p-columnFilter type="text" field="personalNumber" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Name
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="gender">
+        <div class="flex justify-content-between align-items-center">
+          Gender
+          <p-sortIcon field="gender"></p-sortIcon>
+          <p-columnFilter type="text" field="gender" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="mobileNumber">
+        <div class="flex justify-content-between align-items-center">
+          Mobile number
+        </div>
+      </th>
+      <th pSortableColumn="legalAddress">
+        <div class="flex justify-content-between align-items-center">
+          Legal address
+        </div>
+      </th>
+      <th pSortableColumn="physicalAddress">
+        <div class="flex justify-content-between align-items-center">
+          Physical address
+        </div>
+      </th>
+      <th style="width: 8rem"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-client>
-    <tr>
-      <td>{{client.id}}</td>
-      <td>{{client.firstName}} {{client.lastName}}</td>
+    <tr class="p-selectable-row">
       <td>
-        <tbc-button-link href="/clients/{{client.id}}" text="Edit"></tbc-button-link>
+        <span class="p-column-title">Personal Number</span>
+        {{client.personalNumber}}
       </td>
-      <td><p-skeleton></p-skeleton></td>
+      <td>
+        <span class="p-column-title">Name</span>
+        <span class="image-text">{{client.name}}</span>
+      </td>
+      <td>
+        <span class="p-column-title">Gender</span>
+        <span class="image-text">{{client.gender}}</span>
+      </td>
+      <td>
+        <span class="p-column-title">Mobile Number</span>
+        <span class="image-text">{{client.mobileNumber}}</span>
+      </td>
+      <td>
+        <span class="p-column-title">Legal Address</span>
+        <span class="image-text">{{client.legalAddress}}</span>
+      </td>
+      <td>
+        <span class="p-column-title">Physical Address</span>
+        <span class="image-text">{{client.physicalAddress}}</span>
+      </td>
+      <td style="text-align: center">
+        <tbc-button-link text="info" href="/clients/{{client.id}}"></tbc-button-link>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8" class="empty-message">
+        <div class="empty-message">
+          No clients found.
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>

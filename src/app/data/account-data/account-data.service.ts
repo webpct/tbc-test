@@ -10,7 +10,7 @@ const mock: Account[] = [
     accountType: AccountType.cumulative,
     currency: Currency.EUR,
     clientNumber: 123,
-    accountStatus: AccountStatus.active,
+    accountStatus: AccountStatus.closed,
   },
   {
     accountNumber: 2,

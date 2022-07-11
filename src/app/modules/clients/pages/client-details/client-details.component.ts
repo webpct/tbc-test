@@ -14,6 +14,8 @@ export class ClientDetailsComponent implements OnInit {
   public isLoading = true;
   public currentClient: Client;
   public currentAccount: Account;
+  public isClientEditMode = false;
+  public isDeleteModalVisible = false;
 
   constructor(public clientDataService: ClientDataService,
               public accountDataService: AccountDataService) { }
@@ -27,5 +29,4 @@ export class ClientDetailsComponent implements OnInit {
       this.currentAccount = account;
     })
   }
-
 }

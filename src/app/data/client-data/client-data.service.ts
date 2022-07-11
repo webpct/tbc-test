@@ -21,7 +21,7 @@ const mock: Client[] = [
       city: 'Parn',
       address: 'city street'
     },
-    photo: undefined,
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/IMG_logo_%282017%29.svg/2880px-IMG_logo_%282017%29.svg.png',
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const mock: Client[] = [
       city: 'Parn',
       address: 'city street'
     },
-    photo: undefined,
+    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/IMG_logo_%282017%29.svg/2880px-IMG_logo_%282017%29.svg.png',
   },
   {
     id: 3,

@@ -2,14 +2,14 @@
   <div class="col-10 align-content-center">
     <p-panel header="Client details" [toggleable]="true">
       <ng-template pTemplate="icons">
-        <button pButton class="p-panel-header-icon p-link">
-          <span class="pi pi-cog"></span>
-        </button>
+        <button (click)="isClientEditMode = !isClientEditMode" *ngIf="!isClientEditMode" pButton class="p-panel-header-icon edit-icon" icon="pi pi-pencil"></button>
+        <button (click)="isClientEditMode = !isClientEditMode" *ngIf="isClientEditMode" pButton class="p-panel-header-icon edit-icon" icon="pi pi-times"></button>
+        <button (click)="isDeleteModalVisible = true" pButton class="p-panel-header-icon edit-icon" icon="pi pi-trash"></button>
       </ng-template>
       <client-form
         *ngIf="!isLoading"
         [client]="currentClient"
-        [readonly]="true"
+        [readonly]="!isClientEditMode"
       ></client-form>
     </p-panel>
     <div class="pb-4"></div>
@@ -24,3 +24,10 @@
     </p-panel>
   </div>
 </div>
+<p-dialog header="Delete client" [visible]="isDeleteModalVisible" [modal]="true" [style]="{width: '50vw'}">
+  <p>Are you sure that you want to delete client ?</p>
+  <ng-template pTemplate="footer">
+    <p-button (click)="isDeleteModalVisible = false" label="Cancel" styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-trash" label="Delete" styleClass="p-button-text p-button-danger"></p-button>
+  </ng-template>
+</p-dialog>

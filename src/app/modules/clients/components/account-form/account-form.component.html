@@ -28,7 +28,7 @@
     <section class="col-12" *ngIf="!readonly">
       <button pButton type="submit" label="Add Account"></button>
     </section>
-    <section class="col-12" *ngIf="readonly">
-      <button pButton type="submit" label="Close account"></button>
+    <section class="col-12" *ngIf="readonly && isAccountActive">
+      <button pButton type="submit" class="p-button-danger" label="Close account"></button>
     </section>
   </form>

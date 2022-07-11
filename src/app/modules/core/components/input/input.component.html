@@ -1,0 +1,19 @@
+<div class="field mb-0">
+  <label [for]="control.name">{{label}}</label>
+  <div class="p-inputgroup">
+    <span *ngIf="before" class="p-inputgroup-addon">{{before}}</span>
+    <input
+      (change)="onInputChange($event)"
+      (blur)="markAsTouched()"
+      [id]="control.name"
+      [type]="type"
+      [value]="value"
+      [placeholder]="placeholder"
+      [ngClass]="{'ng-invalid ng-dirty': !control.valid && control.touched}"
+      pInputText
+    />
+  </div>
+  <small [id]="control.name" class="p-error block">
+    {{(!control.valid && control.touched && errorMessage) || ''}} &nbsp;
+  </small>
+</div>

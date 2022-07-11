@@ -1,5 +1,4 @@
-<button pButton type="button" label="Create" ></button>
-
+<tbc-button-link href="/clients/add" text="Add client"></tbc-button-link>
 <p-table [value]="clients" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
@@ -13,7 +12,9 @@
     <tr>
       <td>{{client.id}}</td>
       <td>{{client.firstName}} {{client.lastName}}</td>
-      <td><p-skeleton></p-skeleton></td>
+      <td>
+        <tbc-button-link href="/clients/{{client.id}}" text="Edit"></tbc-button-link>
+      </td>
       <td><p-skeleton></p-skeleton></td>
     </tr>
   </ng-template>

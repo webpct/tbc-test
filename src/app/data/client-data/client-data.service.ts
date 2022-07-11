@@ -8,9 +8,9 @@ const mock: Client[] = [
     id: 1,
     firstName: 'Leo',
     lastName: 'Sartin',
-    gender: Gender.Male,
-    personalNumber: '123213',
-    mobileNumber: 12312313,
+    gender: Gender.Female,
+    personalNumber: '12345678901',
+    mobileNumber: 523456789,
     legalAddress: {
       country: 'Bulgaria',
       city: 'Parn',

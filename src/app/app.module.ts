@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeModule } from './modules/prime/prime.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { ClientsModule } from './modules/clients/clients.module';
 
 @NgModule({
   declarations: [

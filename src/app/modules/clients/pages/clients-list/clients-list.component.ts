@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Client } from '../../../models/client.model';
+import { Client } from '../../../../models/client.model';
 
 @Component({
   selector: 'clients-list',

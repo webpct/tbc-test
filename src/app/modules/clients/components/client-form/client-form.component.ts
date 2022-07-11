@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Client, Gender } from '../../../../models/client.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'client-form',
@@ -7,9 +9,65 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientFormComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  public title: string = 'Create client';
+  @Input()
+  public client: Client;
+  @Input()
+  public readonly = false;
+  public clientForm: FormGroup;
+  public genderOptions = [
+    {name: Gender.Male, value: Gender.Male,},
+    {name: Gender.Female, value: Gender.Female },
+  ];
 
-  ngOnInit(): void {
+
+  //TODO create custom validator
+  private latinAndSpacesRegexp = /^[a-zA-Z\s]*$/;
+  private nameValidators = [
+    Validators.required,
+    Validators.min(2),
+    Validators.max(50),
+    Validators.pattern(this.latinAndSpacesRegexp)
+  ];
+  private digitsOnlyRegexp = /^\d+$/;
+
+  onSubmit() {
+    if(!this.clientForm.valid) {
+      return this.clientForm.markAllAsTouched();
+    }
+    console.log(this.clientForm)
+    console.log(this.clientForm.value, this.clientForm.valid)
   }
 
+  ngOnInit(): void {
+    const mobileNumberDefault = this.client?.mobileNumber.toString().substring(1) || '';
+    this.clientForm = new FormGroup({
+      firstName: new FormControl(this.client?.firstName || '', this.nameValidators),
+      lastName: new FormControl(this.client?.firstName || '', this.nameValidators),
+      gender: new FormControl(this.client?.gender || Gender.Male, Validators.required),
+      personalNumber: new FormControl(this.client?.personalNumber || '', [
+        Validators.required,
+        Validators.maxLength(11),
+        Validators.minLength(11),
+        Validators.pattern(this.digitsOnlyRegexp)
+      ]),
+      mobileNumber: new FormControl(mobileNumberDefault, [
+        Validators.required,
+        Validators.maxLength(8),
+        Validators.minLength(8),
+        Validators.pattern(this.digitsOnlyRegexp)
+      ]),
+      legalAddress: new FormGroup({
+        country: new FormControl(this.client?.legalAddress.country || '', [Validators.required]),
+        city: new FormControl(this.client?.legalAddress.city || '', [Validators.required]),
+        address: new FormControl(this.client?.legalAddress.address || '', [Validators.required]),
+      }),
+      physicalAddress: new FormGroup({
+        country: new FormControl(this.client?.physicalAddress.country || '', [Validators.required]),
+        city: new FormControl(this.client?.physicalAddress.city || '', [Validators.required]),
+        address: new FormControl(this.client?.physicalAddress.address || '', [Validators.required]),
+      }),
+    })
+  }
 }

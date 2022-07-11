@@ -1,3 +1,108 @@
-<p-dialog header="Title" [visible]="true">
-  Content
-</p-dialog>
+<div class="flex align-content-center justify-content-center">
+  <div class="col-10 align-content-center">
+    <p-card [header]="title">
+      <form class="grid p-fluid" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <div class="col-12 md:col-6">
+          <tbc-input
+            label="First name"
+            formControlName="firstName"
+            placeholder="First name"
+            errorMessage="Only latin character and spaces allowed"
+          ></tbc-input>
+        </div>
+        <div class="col-12 md:col-6">
+          <tbc-input
+            label="Last name"
+            formControlName="lastName"
+            placeholder="Last name"
+            errorMessage="Only latin character and spaces allowed"
+          ></tbc-input>
+        </div>
+        <div class="col-12 field">
+          <p-selectButton [options]="genderOptions" formControlName="gender" optionLabel="name" optionValue="value"></p-selectButton>
+        </div>
+        <div class="col-12 field">
+          <tbc-input
+            type="number"
+            label="Personal number"
+            formControlName="personalNumber"
+            placeholder="Personal number"
+            errorMessage="Only 11 digits allowed"
+          ></tbc-input>
+        </div>
+        <div class="col-12 field">
+          <tbc-input
+            before="+5"
+            label="Mobile Number"
+            formControlName="mobileNumber"
+            placeholder="Mobile Number"
+            errorMessage="Mobile number should contain 8 digits only"
+          >
+          </tbc-input>
+        </div>
+        <section formGroupName="legalAddress">
+          <h4 class="col-12 mb-0 mt-0">Legal address</h4>
+          <div class="flex">
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="Country"
+                formControlName="country"
+                placeholder="Country"
+                errorMessage="Required"
+              ></tbc-input>
+            </div>
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="City"
+                formControlName="city"
+                placeholder="City"
+                errorMessage="Required"
+              ></tbc-input>
+            </div>
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="Address"
+                formControlName="address"
+                placeholder="Address"
+                errorMessage="Required"
+              ></tbc-input>
+            </div>
+          </div>
+        </section>
+        <section class="pb-3" formGroupName="physicalAddress">
+          <h4 class="col-12 mb-0 mt-0">Physical address</h4>
+          <div class="flex">
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="Country"
+                formControlName="country"
+                placeholder="Country"
+                errorMessage="Required"
+              >
+              </tbc-input>
+            </div>
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="City"
+                formControlName="city"
+                placeholder="City"
+                errorMessage="Required"
+              ></tbc-input>
+            </div>
+            <div class="col-12 md:col-4 field">
+              <tbc-input
+                label="Address"
+                formControlName="address"
+                placeholder="Address"
+                errorMessage="Required"
+              ></tbc-input>
+            </div>
+          </div>
+        </section>
+        <section *ngIf="!readonly" class="col-12">
+          <button pButton type="submit" label="Save"></button>
+        </section>
+      </form>
+    </p-card>
+  </div>
+</div>

@@ -7,27 +7,32 @@
         <button (click)="isDeleteModalVisible = true" pButton class="p-panel-header-icon edit-icon" icon="pi pi-trash"></button>
       </ng-template>
       <client-form
-        *ngIf="!isLoading"
-        [client]="currentClient"
+        [client]="client"
         [readonly]="!isClientEditMode"
+        [isLoading]="isClientLoading"
+        (submitForm)="updateClient($event)"
       ></client-form>
     </p-panel>
     <div class="pb-4"></div>
     <p-panel header="Accounts" [toggleable]="true">
-      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
-      <p-divider></p-divider>
-      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
-      <p-divider></p-divider>
-      <tbc-account-form [readonly]="true" [account]="currentAccount"></tbc-account-form>
-      <p-divider></p-divider>
       <tbc-account-form></tbc-account-form>
+      <ng-container *ngFor="let account of accounts;">
+        <p-divider></p-divider>
+        <tbc-account-form [readonly]="true" [account]="account"></tbc-account-form>
+      </ng-container>
     </p-panel>
   </div>
 </div>
-<p-dialog header="Delete client" [visible]="isDeleteModalVisible" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog
+  header="Delete client"
+  [visible]="isDeleteModalVisible"
+  [modal]="true"
+  [style]="{width: '50vw'}"
+  [closable]="!isDeleteLoading"
+>
   <p>Are you sure that you want to delete client ?</p>
   <ng-template pTemplate="footer">
-    <p-button (click)="isDeleteModalVisible = false" label="Cancel" styleClass="p-button-text"></p-button>
-    <p-button icon="pi pi-trash" label="Delete" styleClass="p-button-text p-button-danger"></p-button>
+    <p-button [disabled]="isDeleteLoading" (click)="isDeleteModalVisible = false" label="Cancel" styleClass="p-button-text"></p-button>
+    <p-button [disabled]="isDeleteLoading" (click)="deleteClient()" icon="pi pi-trash" label="Delete" styleClass="p-button-text p-button-danger"></p-button>
   </ng-template>
 </p-dialog>

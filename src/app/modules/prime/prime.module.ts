@@ -13,6 +13,7 @@ import {DividerModule} from 'primeng/divider';
 import {PanelModule} from 'primeng/panel';
 import { TagModule } from 'primeng/tag';
 import {DropdownModule} from 'primeng/dropdown';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {DropdownModule} from 'primeng/dropdown';
     DividerModule,
     PanelModule,
     TagModule,
-    DropdownModule
+    DropdownModule,
+    ProgressBarModule
   ],
   exports: [
     ButtonModule,
@@ -46,7 +48,8 @@ import {DropdownModule} from 'primeng/dropdown';
     DividerModule,
     PanelModule,
     TagModule,
-    DropdownModule
+    DropdownModule,
+    ProgressBarModule
   ]
 })
 export class PrimeModule { }

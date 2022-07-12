@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Account, AccountStatus, AccountType } from '../../../../models/account.model';
 import { Currency } from '../../../../models/currency.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,6 +13,11 @@ export class AccountFormComponent implements OnInit {
   public account: Account;
   @Input()
   public readonly = false;
+  @Output()
+  public closeAccount: EventEmitter<number> = new EventEmitter();
+  @Output()
+  public createAccount: EventEmitter<Account> = new EventEmitter();
+
   public accountForm: FormGroup;
   private digitsOnlyRegexp = /^\d+$/;
 
@@ -57,4 +62,7 @@ export class AccountFormComponent implements OnInit {
     return this.account?.accountNumber;
   }
 
+  public submitAccount(){
+    this.createAccount.emit(this.accountForm.value);
+  }
 }

@@ -10,7 +10,7 @@ export interface Address {
 }
 
 export interface Client {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   gender: Gender;

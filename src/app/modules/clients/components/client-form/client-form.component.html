@@ -48,10 +48,10 @@
             [readonly]="readonly"
           ></p-dropdown>
         </div>
-        <section formGroupName="legalAddress">
+        <section class="col-12" formGroupName="legalAddress">
           <h4 class="col-12 mb-0 mt-0">Legal address</h4>
           <div class="flex">
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 [readonly]="readonly"
                 label="Country"
@@ -60,7 +60,7 @@
                 errorMessage="Required"
               ></tbc-input>
             </div>
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 [readonly]="readonly"
                 label="City"
@@ -69,7 +69,7 @@
                 errorMessage="Required"
               ></tbc-input>
             </div>
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 label="Address"
                 [readonly]="readonly"
@@ -80,10 +80,10 @@
             </div>
           </div>
         </section>
-        <section class="pb-3" formGroupName="physicalAddress">
+        <section class="pb-3 col-12" formGroupName="physicalAddress">
           <h4 class="col-12 mb-0 mt-0">Physical address</h4>
           <div class="flex">
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 label="Country"
                 formControlName="country"
@@ -93,7 +93,7 @@
               >
               </tbc-input>
             </div>
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 label="City"
                 formControlName="city"
@@ -102,7 +102,7 @@
                 errorMessage="Required"
               ></tbc-input>
             </div>
-            <div class="col-12 md:col-4 field">
+            <div class="col-4 field">
               <tbc-input
                 label="Address"
                 formControlName="address"
@@ -114,6 +114,6 @@
           </div>
         </section>
         <section *ngIf="!readonly" class="col-12">
-          <button pButton type="submit" label="Save"></button>
+          <button pButton [loading]="isLoading" type="submit" label="Save"></button>
         </section>
       </form>

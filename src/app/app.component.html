@@ -1,1 +1,4 @@
+<div *ngIf="isLoading$ | async">
+  <p-progressBar mode="indeterminate" [style]="{'height': '8px'}"></p-progressBar>
+</div>
 <router-outlet></router-outlet>

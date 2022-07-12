@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Address, Client, Gender } from '../../../../models/client.model';
+import { Client, Gender } from '../../../../models/client.model';
 import { LazyLoadEvent } from 'primeng/api';
 
-interface Custom {
+interface TableCustomer {
   id: number;
   name: string;
   gender: Gender;
@@ -19,11 +19,12 @@ interface Custom {
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss']
 })
-export class ClientsListComponent implements OnInit {
-  public clients: Custom[] = [];
+export class ClientsListComponent {
+  public clients: TableCustomer[] = [];
+  public loading: boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.data.subscribe(data => {
-      console.log(data['clients'])
       this.clients = data['clients'].entities.map((el:Client) => ({
         id: el.id,
         name: el.firstName + " " + el.lastName,
@@ -34,16 +35,10 @@ export class ClientsListComponent implements OnInit {
         physicalAddress: el.physicalAddress.country + ", " + el.physicalAddress.city + ", " + el.physicalAddress.address,
         photo: el.photo
       }));
-      this.loading = false;
     })
   }
 
-  loading: boolean = true;
-
-  ngOnInit() {
-  }
-
   loadClients(event: LazyLoadEvent) {
-    console.log(event);
+    //console.log(event);
   }
 }

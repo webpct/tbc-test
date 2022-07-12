@@ -4,6 +4,7 @@ import { ClientsListComponent } from './pages/clients-list/clients-list.componen
 import { ClientsResolver } from './resolvers/clients/clients.resolver';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
 import { ClientDetailsComponent } from './pages/client-details/client-details.component';
+import { ClientDetailsResolver } from './resolvers/client-details/client-details.resolver';
 
 const routes: Routes = [
   {
@@ -16,15 +17,12 @@ const routes: Routes = [
   {
     path: 'clients/add',
     component: CreateClientComponent,
-    resolve: {
-      clients: ClientsResolver
-    }
   },
   {
     path: 'clients/:id',
     component: ClientDetailsComponent,
     resolve: {
-      clients: ClientsResolver
+      clientDetails: ClientDetailsResolver
     }
   },
   {path: '**', redirectTo: '/'}

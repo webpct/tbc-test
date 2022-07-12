@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Account, AccountStatus, AccountType } from '../../models/account.model';
 import { Currency } from '../../models/currency.model';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { PaginationResponse } from '../../models/pagination-response.model';
+import { HttpClient } from '@angular/common/http';
+import { Client } from '../../models/client.model';
+import { environment } from '../../../environments/environment';
 
 const mock: Account[] = [
   {
@@ -48,20 +51,22 @@ const mock: Account[] = [
 })
 export class AccountDataService {
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) { }
 
-  findAccount(id: number): Observable<Account> {
-    return of(mock[0]);
+  findAllAccounts(clientNumber: string): Observable<Account[]> {
+    return this.httpClient
+      .get<PaginationResponse<Account>>(`${environment.apiUrl}/accounts?top=100000&clientNumber=${clientNumber}`)
+      .pipe(map(value => value.entities))
   }
 
-  findAllAccounts(options: any = {}): Observable<PaginationResponse<Account>> {
-    return of({
-      entities: mock,
-      pagination: {
-        pages: 1,
-        pageSize: 10,
-        currentPage: 1
-      }
-    });
+  createAccount(account: Account): Observable<any> {
+    return of();
+  }
+
+  closeAccount(accountId: string): Observable<any> {
+    return this.httpClient
+      .post(`${environment.apiUrl}/closeAccount`, {
+        id: accountId
+      })
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Client, Gender } from '../../../../models/client.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ClientFormComponent implements OnInit {
 
   @Input()
+  public isLoading: boolean = false;
+  @Input()
   public title: string = 'Create client';
   @Input()
   public client: Client;
@@ -17,13 +19,14 @@ export class ClientFormComponent implements OnInit {
   public readonly = false;
   @Input()
   public toggable = false;
+  @Output()
+  public submitForm: EventEmitter<Client> = new EventEmitter();
 
   public clientForm: FormGroup;
   public genderOptions = [
     {name: Gender.Male, value: Gender.Male,},
     {name: Gender.Female, value: Gender.Female },
   ];
-
 
   //TODO create custom validator
   private latinAndSpacesRegexp = /^[a-zA-Z\s]*$/;
@@ -37,15 +40,20 @@ export class ClientFormComponent implements OnInit {
 
   onSubmit() {
     if(!this.clientForm.valid) {
-      return this.clientForm.markAllAsTouched();
+      this.clientForm.markAllAsTouched();
+      return;
     }
+    this.submitForm.emit({
+      ...this.clientForm.value,
+      mobileNumber: '5'+ this.clientForm.value.mobileNumber
+    });
   }
 
   ngOnInit(): void {
     const mobileNumberDefault = this.client?.mobileNumber.toString().substring(1) || '';
     this.clientForm = new FormGroup({
       firstName: new FormControl(this.client?.firstName || '', this.nameValidators),
-      lastName: new FormControl(this.client?.firstName || '', this.nameValidators),
+      lastName: new FormControl(this.client?.lastName || '', this.nameValidators),
       gender: new FormControl(this.client?.gender || Gender.Male, Validators.required),
       personalNumber: new FormControl(this.client?.personalNumber || '', [
         Validators.required,

@@ -14,11 +14,14 @@ import {PanelModule} from 'primeng/panel';
 import { TagModule } from 'primeng/tag';
 import {DropdownModule} from 'primeng/dropdown';
 import {ProgressBarModule} from 'primeng/progressbar';
-
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [],
   imports: [
+    MessagesModule,
+    MessageModule,
     CommonModule,
     ButtonModule,
     SkeletonModule,
@@ -36,6 +39,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
     ProgressBarModule
   ],
   exports: [
+    MessagesModule,
+    MessageModule,
     ButtonModule,
     SkeletonModule,
     TableModule,

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Client, Gender } from '../../../../models/client.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Client, Gender } from '../../../../models/client.model';
 
 @Component({
-  selector: 'client-form',
+  selector: 'tbc-client-form',
   templateUrl: './client-form.component.html',
   styleUrls: ['./client-form.component.scss']
 })
@@ -55,7 +55,7 @@ export class ClientFormComponent implements OnInit {
       firstName: new FormControl(this.client?.firstName || '', this.nameValidators),
       lastName: new FormControl(this.client?.lastName || '', this.nameValidators),
       gender: new FormControl(this.client?.gender || Gender.Male, Validators.required),
-      personalNumber: new FormControl(this.client?.personalNumber || '', [
+      personalNumber: new FormControl(this.client?.personalNumber || `${+(new Date())}`.substring(2), [
         Validators.required,
         Validators.maxLength(11),
         Validators.minLength(11),

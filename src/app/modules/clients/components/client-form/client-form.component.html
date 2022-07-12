@@ -1,119 +1,119 @@
-<form class="grid p-fluid" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-        <div class="col-12 md:col-6">
-          <tbc-input
-            label="First name"
-            formControlName="firstName"
-            [readonly]="readonly"
-            placeholder="First name"
-            errorMessage="Only latin character and spaces allowed"
-          ></tbc-input>
-        </div>
-        <div class="col-12 md:col-6">
-          <tbc-input
-            [readonly]="readonly"
-            label="Last name"
-            formControlName="lastName"
-            placeholder="Last name"
-            errorMessage="Only latin character and spaces allowed"
-          ></tbc-input>
-        </div>
-        <div class="col-12 field">
-          <tbc-input
-            [readonly]="readonly"
-            type="number"
-            label="Personal number"
-            formControlName="personalNumber"
-            placeholder="Personal number"
-            errorMessage="Only 11 digits allowed"
-          ></tbc-input>
-        </div>
-        <div class="col-12 field">
-          <tbc-input
-            [readonly]="readonly"
-            before="+5"
-            label="Mobile Number"
-            formControlName="mobileNumber"
-            placeholder="Mobile Number"
-            errorMessage="Mobile number should contain 8 digits only"
-          >
-          </tbc-input>
-        </div>
-        <div class="col-12 field">
-          <h4 class="mb-3 mt-0">Gender</h4>
-          <p-dropdown
-            [options]="genderOptions"
-            formControlName="gender"
-            optionLabel="name"
-            optionValue="value"
-            [readonly]="readonly"
-          ></p-dropdown>
-        </div>
-        <section class="col-12" formGroupName="legalAddress">
-          <h4 class="col-12 mb-0 mt-0">Legal address</h4>
-          <div class="flex">
-            <div class="col-4 field">
-              <tbc-input
-                [readonly]="readonly"
-                label="Country"
-                formControlName="country"
-                placeholder="Country"
-                errorMessage="Required"
-              ></tbc-input>
-            </div>
-            <div class="col-4 field">
-              <tbc-input
-                [readonly]="readonly"
-                label="City"
-                formControlName="city"
-                placeholder="City"
-                errorMessage="Required"
-              ></tbc-input>
-            </div>
-            <div class="col-4 field">
-              <tbc-input
-                label="Address"
-                [readonly]="readonly"
-                formControlName="address"
-                placeholder="Address"
-                errorMessage="Required"
-              ></tbc-input>
-            </div>
-          </div>
-        </section>
-        <section class="pb-3 col-12" formGroupName="physicalAddress">
-          <h4 class="col-12 mb-0 mt-0">Physical address</h4>
-          <div class="flex">
-            <div class="col-4 field">
-              <tbc-input
-                label="Country"
-                formControlName="country"
-                [readonly]="readonly"
-                placeholder="Country"
-                errorMessage="Required"
-              >
-              </tbc-input>
-            </div>
-            <div class="col-4 field">
-              <tbc-input
-                label="City"
-                formControlName="city"
-                placeholder="City"
-                [readonly]="readonly"
-                errorMessage="Required"
-              ></tbc-input>
-            </div>
-            <div class="col-4 field">
-              <tbc-input
-                label="Address"
-                formControlName="address"
-                [readonly]="readonly"
-                placeholder="Address"
-                errorMessage="Required"
-              ></tbc-input>
-            </div>
-          </div>
-        </section>
-        <section *ngIf="!readonly" class="col-12">
-          <button pButton [loading]="isLoading" type="submit" label="Save"></button>
-        </section>
-      </form>
+<form (ngSubmit)="onSubmit()" [formGroup]="clientForm" class="grid p-fluid">
+  <div class="col-12 md:col-6">
+    <tbc-input
+      [readonly]="readonly"
+      errorMessage="Only latin character and spaces allowed"
+      formControlName="firstName"
+      label="First name"
+      placeholder="First name"
+    ></tbc-input>
+  </div>
+  <div class="col-12 md:col-6">
+    <tbc-input
+      [readonly]="readonly"
+      errorMessage="Only latin character and spaces allowed"
+      formControlName="lastName"
+      label="Last name"
+      placeholder="Last name"
+    ></tbc-input>
+  </div>
+  <div class="col-12 field">
+    <tbc-input
+      [readonly]="true"
+      errorMessage="Only 11 digits allowed"
+      formControlName="personalNumber"
+      label="Personal number"
+      placeholder="Personal number"
+      type="number"
+    ></tbc-input>
+  </div>
+  <div class="col-12 field">
+    <tbc-input
+      [readonly]="readonly"
+      before="+5"
+      errorMessage="Mobile number should contain 8 digits only"
+      formControlName="mobileNumber"
+      label="Mobile Number"
+      placeholder="Mobile Number"
+    >
+    </tbc-input>
+  </div>
+  <div class="col-12 field">
+    <h4 class="mb-3 mt-0">Gender</h4>
+    <p-dropdown
+      [options]="genderOptions"
+      [readonly]="readonly"
+      formControlName="gender"
+      optionLabel="name"
+      optionValue="value"
+    ></p-dropdown>
+  </div>
+  <section class="col-12" formGroupName="legalAddress">
+    <h4 class="col-12 mb-0 mt-0">Legal address</h4>
+    <div class="flex">
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="country"
+          label="Country"
+          placeholder="Country"
+        ></tbc-input>
+      </div>
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="city"
+          label="City"
+          placeholder="City"
+        ></tbc-input>
+      </div>
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="address"
+          label="Address"
+          placeholder="Address"
+        ></tbc-input>
+      </div>
+    </div>
+  </section>
+  <section class="pb-3 col-12" formGroupName="physicalAddress">
+    <h4 class="col-12 mb-0 mt-0">Physical address</h4>
+    <div class="flex">
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="country"
+          label="Country"
+          placeholder="Country"
+        >
+        </tbc-input>
+      </div>
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="city"
+          label="City"
+          placeholder="City"
+        ></tbc-input>
+      </div>
+      <div class="col-4 field">
+        <tbc-input
+          [readonly]="readonly"
+          errorMessage="Required"
+          formControlName="address"
+          label="Address"
+          placeholder="Address"
+        ></tbc-input>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="!readonly" class="col-12">
+    <button [loading]="isLoading" label="Save" pButton type="submit"></button>
+  </section>
+</form>

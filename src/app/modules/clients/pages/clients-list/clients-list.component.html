@@ -5,18 +5,16 @@
   [lazy]="true"
   [rows]="10"
   [showCurrentPageReport]="true"
-  [rowsPerPageOptions]="[10,25,50]"
-  (onLazyLoad)="loadClients($event)"
   [loading]="loading" responsiveLayout="scroll"
   [paginator]="true"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} clients"
+  (onLazyLoad)="loadCarsLazy($event)"
+  [totalRecords]="totalRecords"
   [filterDelay]="0"
-  [globalFilterFields]="['name','country.name','representative.name','status']"
 >
   <ng-template pTemplate="caption">
     <div class="table-header flex justify-content-between align-items-center">
       <h2 class="mb-0 mt-0">Clients</h2>
-      <tbc-button-link href="/clients/add" text="Add client"></tbc-button-link>
+      <tbc-button-link href="./add" text="Add client"></tbc-button-link>
     </div>
   </ng-template>
   <ng-template pTemplate="header">
@@ -24,22 +22,16 @@
       <th pSortableColumn="personalNumber">
         <div class="flex justify-content-between align-items-center">
           Personal number
-          <p-sortIcon field="personalNumber"></p-sortIcon>
-          <p-columnFilter type="text" field="personalNumber" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th pSortableColumn="name">
         <div class="flex justify-content-between align-items-center">
           Name
-          <p-sortIcon field="name"></p-sortIcon>
-          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th pSortableColumn="gender">
         <div class="flex justify-content-between align-items-center">
           Gender
-          <p-sortIcon field="gender"></p-sortIcon>
-          <p-columnFilter type="text" field="gender" display="menu" class="ml-auto"></p-columnFilter>
         </div>
       </th>
       <th pSortableColumn="mobileNumber">
@@ -87,7 +79,7 @@
         <span class="image-text">{{client.physicalAddress}}</span>
       </td>
       <td style="text-align: center">
-        <tbc-button-link text="Info" href="/clients/{{client.id}}"></tbc-button-link>
+        <tbc-button-link text="Info" href="./{{client.id}}"></tbc-button-link>
       </td>
     </tr>
   </ng-template>

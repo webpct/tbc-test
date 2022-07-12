@@ -1,9 +1,8 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { Client, Gender } from '../../../../models/client.model';
-import { FormGroup, FormControl, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ClientDataService } from '../../../../data/client-data/client-data.service';
-import { take } from 'rxjs';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { Client } from '../../../../models/client.model';
+import { ClientDataService } from '../../../../data/client-data/client-data.service';
 
 @Component({
   selector: 'tbc-create-client',

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Client, Gender } from '../../models/client.model';
-import { map, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { Client } from '../../models/client.model';
 import { PaginationResponse } from '../../models/pagination-response.model';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,19 +35,26 @@ export class ClientDataService {
     return formData;
   }
 
-  findClient(id: number): Observable<Client> {
-    return this.httpClient.get<PaginationResponse<Client>>(`${environment.apiUrl}/clients?top=10`)
+  findClient(id: string): Observable<Client> {
+    return this.httpClient.get<PaginationResponse<Client>>(`${environment.apiUrl}/clients?top=100000000000000`)
       .pipe(map((data: any) => {
-        const { _id, ...client } = data.entities.filter((client: any) => client._id === id)[0];
-        return {
-          ...client,
-          id: _id
+        try {
+          const { _id, ...client } = data.entities.filter((client: any) => client._id === id)[0];
+          return {
+            ...client,
+            id: _id
+          }
+        } catch (err) {
+          return null;
         }
       }))
   }
 
-  findAllClient(params: any = {}): Observable<PaginationResponse<Client>> {
-    return this.httpClient.get<PaginationResponse<Client>>(`${environment.apiUrl}/clients?top=10`)
+  findAllClient(options: {
+    top: number,
+    bot: number
+  } = { top: 10, bot: 0 }): Observable<PaginationResponse<Client>> {
+    return this.httpClient.get<PaginationResponse<Client>>(`${environment.apiUrl}/clients?top=${options.top}&bot=${options.bot}`)
       .pipe(map(data => {
         const entities = data.entities.map(({ _id, ...client }: any) => ({ ...client, id: _id }))
         data.entities = entities;
@@ -60,7 +67,6 @@ export class ClientDataService {
   }
 
   public updateClient(client: Client):Observable<any> {
-    console.log(client)
     return this.httpClient.put(`${environment.apiUrl}/clients`, this.convertClientToFormData(client));
   }
 

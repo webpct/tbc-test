@@ -4,12 +4,10 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { map, Observable, of, switchMap, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Client } from '../../../../models/client.model';
-import { ClientDataService } from '../../../../data/client-data/client-data.service';
-import { PaginationResponse } from '../../../../models/pagination-response.model';
-import { AccountDataService } from '../../../../data/account-data/account-data.service';
 import { Account } from '../../../../models/account.model';
+import { ClientDetailsService } from '../../services/client-details.service';
 
 interface ClientDetailsData {
   client: Client,
@@ -20,25 +18,13 @@ interface ClientDetailsData {
   providedIn: 'root'
 })
 export class ClientDetailsResolver implements Resolve<ClientDetailsData> {
+
   constructor(
-    private clientDataService: ClientDataService,
-    private accountDataService: AccountDataService
+    public clientDetailsService: ClientDetailsService
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ClientDetailsData> {
     const clientId = route.params['id'];
-    return this.clientDataService.findClient(clientId).pipe(
-      take(1),
-      switchMap((client: Client) => {
-        return this.accountDataService.findAllAccounts(client.personalNumber)
-          .pipe(
-            take(1),
-            map((accounts => ({
-              accounts: accounts,
-              client,
-            })))
-          )
-      })
-    );
+    return this.clientDetailsService.getClientsDetails(clientId)
   }
 }

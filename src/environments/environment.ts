@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://stark-hollows-80800.herokuapp.com/api'
+  apiUrl: 'https://stark-hollows-80800.herokuapp.com/api'
 };
 
 /*

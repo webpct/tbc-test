@@ -13,13 +13,14 @@ export class AccountFormComponent implements OnInit {
   public account: Account;
   @Input()
   public readonly = false;
+  @Input()
+  public isLoading = false;
   @Output()
-  public closeAccount: EventEmitter<number> = new EventEmitter();
+  public closeAccount: EventEmitter<Account> = new EventEmitter();
   @Output()
   public createAccount: EventEmitter<Account> = new EventEmitter();
 
   public accountForm: FormGroup;
-  private digitsOnlyRegexp = /^\d+$/;
 
   public accountOptions = [
     {name: AccountType.current, value: AccountType.current },
@@ -36,14 +37,8 @@ export class AccountFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountForm = new FormGroup({
-      accountNumber: new FormControl(this.account?.accountNumber || '', [
-        Validators.required,
-        Validators.pattern(this.digitsOnlyRegexp)
-      ]),
-      clientNumber: new FormControl(this.account?.clientNumber || '', [
-        Validators.required,
-        Validators.pattern(this.digitsOnlyRegexp)
-      ]),
+      accountNumber: new FormControl(this.account?.accountNumber || ''),
+      clientNumber: new FormControl(this.account?.clientNumber || ''),
       accountType: new FormControl(this.account?.accountType || AccountType.current, Validators.required),
       currency: new FormControl(this.account?.currency || Currency.GEL, Validators.required),
       accountStatus: new FormControl(this.account?.accountStatus || AccountStatus.active, Validators.required),

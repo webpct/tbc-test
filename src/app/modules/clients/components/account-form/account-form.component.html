@@ -28,13 +28,15 @@
     <section class="col-12" *ngIf="!readonly">
       <button
         pButton
+        [loading]="isLoading"
         type="submit"
         label="Add Account"
       ></button>
     </section>
     <section class="col-12" *ngIf="readonly && isAccountActive">
       <button
-        (click)="closeAccount.emit(account.accountNumber)"
+        [loading]="isLoading"
+        (click)="closeAccount.emit(account)"
         pButton
         type="submit"
         class="p-button-danger"

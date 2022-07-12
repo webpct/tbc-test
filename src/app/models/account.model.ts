@@ -13,7 +13,7 @@ export enum AccountStatus {
 
 export interface Account {
   accountNumber: number;
-  clientNumber: number;
+  clientNumber: string;
   accountType: AccountType;
   currency: Currency;
   accountStatus: AccountStatus;

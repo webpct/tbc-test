@@ -1,44 +1,33 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Client, Gender } from '../../../../models/client.model';
 import { LazyLoadEvent } from 'primeng/api';
-
-interface TableCustomer {
-  id: number;
-  name: string;
-  gender: Gender;
-  personalNumber: string;
-  mobileNumber: number;
-  legalAddress: string;
-  physicalAddress: string;
-  photo?: string;
-}
+import { ClientsTableService, ClientsTableView } from '../../services/clients-table.service';
 
 @Component({
-  selector: 'clients-list',
+  selector: 'tbc-clients-list',
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss']
 })
 export class ClientsListComponent {
-  public clients: TableCustomer[] = [];
+  public clients: ClientsTableView[] = [];
   public loading: boolean = false;
+  public totalRecords = 0;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.data.subscribe(data => {
-      this.clients = data['clients'].entities.map((el:Client) => ({
-        id: el.id,
-        name: el.firstName + " " + el.lastName,
-        gender: el.gender,
-        personalNumber: el.personalNumber,
-        mobileNumber: el.mobileNumber,
-        legalAddress: el.legalAddress.country + ", " + el.legalAddress.city + ", " + el.legalAddress.address,
-        physicalAddress: el.physicalAddress.country + ", " + el.physicalAddress.city + ", " + el.physicalAddress.address,
-        photo: el.photo
-      }));
-    })
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private clientsTableService: ClientsTableService
+  ) {
+    const data = this.activatedRoute.snapshot.data["clients"];
+    this.clients = data.entities;
+    this.totalRecords = data.pagination.pages * data.pagination.pageSize;
   }
 
-  loadClients(event: LazyLoadEvent) {
-    //console.log(event);
+  loadCarsLazy(event: LazyLoadEvent) {
+    this.clientsTableService.getClientsList({
+      bot: event.first || 0,
+      top: (event.first || 0)+(event.rows || 0),
+    }).subscribe(data => {
+      this.clients = data.entities;
+    })
   }
 }

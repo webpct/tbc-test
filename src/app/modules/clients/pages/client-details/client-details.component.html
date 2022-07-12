@@ -1,38 +1,45 @@
 <div class="flex align-content-center justify-content-center">
   <div class="col-10 align-content-center">
-    <p-panel header="Client details" [toggleable]="true">
+    <p-panel [toggleable]="true" header="Client details">
       <ng-template pTemplate="icons">
-        <button (click)="isClientEditMode = !isClientEditMode" *ngIf="!isClientEditMode" pButton class="p-panel-header-icon edit-icon" icon="pi pi-pencil"></button>
-        <button (click)="isClientEditMode = !isClientEditMode" *ngIf="isClientEditMode" pButton class="p-panel-header-icon edit-icon" icon="pi pi-times"></button>
-        <button (click)="isDeleteModalVisible = true" pButton class="p-panel-header-icon edit-icon" icon="pi pi-trash"></button>
+        <button (click)="isClientEditMode = !isClientEditMode"
+                class="p-panel-header-icon edit-icon"
+                icon="pi {{isClientEditMode ? 'pi-times' : 'pi-pencil'}}"
+                pButton
+        ></button>
+        <button (click)="isDeleteModalVisible = true" class="p-panel-header-icon edit-icon" icon="pi pi-trash"
+                pButton></button>
       </ng-template>
-      <client-form
-        [client]="client"
-        [readonly]="!isClientEditMode"
-        [isLoading]="isClientLoading"
+      <tbc-client-form
         (submitForm)="updateClient($event)"
-      ></client-form>
+        [client]="client"
+        [isLoading]="isClientLoading"
+        [readonly]="!isClientEditMode"
+      ></tbc-client-form>
     </p-panel>
     <div class="pb-4"></div>
-    <p-panel header="Accounts" [toggleable]="true">
-      <tbc-account-form></tbc-account-form>
+    <p-panel [toggleable]="true" header="Accounts">
+      <tbc-account-form (createAccount)="createAccount($event)" [isLoading]="isAccountLoading"></tbc-account-form>
       <ng-container *ngFor="let account of accounts;">
         <p-divider></p-divider>
-        <tbc-account-form [readonly]="true" [account]="account"></tbc-account-form>
+        <tbc-account-form (closeAccount)="closeAccount($event)" [account]="account" [isLoading]="isAccountLoading"
+                          [readonly]="true"></tbc-account-form>
       </ng-container>
     </p-panel>
   </div>
 </div>
 <p-dialog
-  header="Delete client"
-  [visible]="isDeleteModalVisible"
+  [closable]="!isDeleteLoading"
   [modal]="true"
   [style]="{width: '50vw'}"
-  [closable]="!isDeleteLoading"
+  [visible]="isDeleteModalVisible"
+  header="Delete client"
 >
   <p>Are you sure that you want to delete client ?</p>
   <ng-template pTemplate="footer">
-    <p-button [disabled]="isDeleteLoading" (click)="isDeleteModalVisible = false" label="Cancel" styleClass="p-button-text"></p-button>
-    <p-button [disabled]="isDeleteLoading" (click)="deleteClient()" icon="pi pi-trash" label="Delete" styleClass="p-button-text p-button-danger"></p-button>
+    <p-button (click)="isDeleteModalVisible = false" [disabled]="isDeleteLoading" label="Cancel"
+              styleClass="p-button-text"></p-button>
+    <p-button (click)="deleteClient()" [disabled]="isDeleteLoading" icon="pi pi-trash" label="Delete"
+              styleClass="p-button-text p-button-danger"></p-button>
   </ng-template>
 </p-dialog>

@@ -1,5 +1,5 @@
-import { Component, forwardRef, Injector, Input, OnInit, Optional, Self } from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { Component, Injector, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'tbc-input',
@@ -63,7 +63,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit(): void {
-    //TODO notes
     try {
       this.control = this.inject.get(NgControl);
     } catch (err) {

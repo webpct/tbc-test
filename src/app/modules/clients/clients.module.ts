@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientsListComponent } from './pages/clients-list/clients-list.component';
 import { PrimeModule } from '../prime/prime.module';
-import { ClientsComponent } from './clients.component';
-import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
@@ -16,7 +14,6 @@ import { AccountFormComponent } from './components/account-form/account-form.com
 @NgModule({
   declarations: [
     ClientsListComponent,
-    ClientsComponent,
     ClientFormComponent,
     CreateClientComponent,
     ClientDetailsComponent,
@@ -26,7 +23,6 @@ import { AccountFormComponent } from './components/account-form/account-form.com
     HttpClientModule,
     CommonModule,
     PrimeModule,
-    ClientsRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CoreModule

@@ -6,7 +6,7 @@ import { CreateClientComponent } from './pages/create-client/create-client.compo
 import { ClientDetailsComponent } from './pages/client-details/client-details.component';
 import { ClientDetailsResolver } from './resolvers/client-details/client-details.resolver';
 
-const routes: Routes = [
+export const clientRoutes: Routes = [
   {
     path: 'clients',
     component: ClientsListComponent,
@@ -25,13 +25,4 @@ const routes: Routes = [
       clientDetails: ClientDetailsResolver
     }
   },
-  {path: '**', redirectTo: '/'}
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
-  exports: [RouterModule]
-})
-export class ClientsRoutingModule { }

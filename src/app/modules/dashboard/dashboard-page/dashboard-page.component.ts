@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'dashboard-page',
+  selector: 'tbc-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss']
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

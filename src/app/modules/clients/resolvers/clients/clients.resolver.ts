@@ -4,18 +4,17 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Client } from '../../../../models/client.model';
-import { ClientDataService } from '../../../../data/client-data/client-data.service';
+import { Observable } from 'rxjs';
 import { PaginationResponse } from '../../../../models/pagination-response.model';
+import { ClientsTableService, ClientsTableView } from '../../services/clients-table.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientsResolver implements Resolve<PaginationResponse<Client>> {
-  constructor(private clientDataService: ClientDataService) {}
+export class ClientsResolver implements Resolve<PaginationResponse<ClientsTableView>> {
+  constructor(private clientsTableService: ClientsTableService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PaginationResponse<Client>> {
-    return this.clientDataService.findAllClient();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PaginationResponse<ClientsTableView>> {
+    return this.clientsTableService.getClientsList();
   }
 }

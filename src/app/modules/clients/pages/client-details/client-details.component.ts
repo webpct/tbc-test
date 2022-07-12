@@ -4,6 +4,8 @@ import { ClientDataService } from '../../../../data/client-data/client-data.serv
 import { Account, AccountStatus } from '../../../../models/account.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountDataService } from '../../../../data/account-data/account-data.service';
+import { ClientDetailsService } from '../../services/client-details.service';
+import { switchMap, take, tap } from 'rxjs';
 
 @Component({
   selector: 'tbc-client-details',
@@ -18,17 +20,18 @@ export class ClientDetailsComponent {
   public isDeleteModalVisible = false;
   public isDeleteLoading = false;
   public isClientLoading = false;
+  public isAccountLoading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private clientDataService: ClientDataService,
     private accountDataService: AccountDataService,
-    private router: Router
+    private router: Router,
+    public clientDetailsService: ClientDetailsService
   ) {
-    this.activatedRoute.data.subscribe(data => {
-      this.client = data['clientDetails'].client;
-      this.accounts = data['clientDetails'].accounts;
-    })
+    const { client, accounts } = this.activatedRoute.snapshot.data["clientDetails"];
+    this.client = client;
+    this.accounts = accounts;
   }
 
   public updateClient(client: Client){
@@ -37,10 +40,10 @@ export class ClientDetailsComponent {
       ...client,
       id: this.client.id
     })
+      .pipe(switchMap(() => this.refreshData()))
       .subscribe(() => {
         this.isClientLoading = false;
         this.isClientEditMode = false;
-        this.reloadPage();
       })
   }
 
@@ -54,24 +57,38 @@ export class ClientDetailsComponent {
   }
 
   public createAccount(account: Account) {
+    this.isAccountLoading = true;
     this.accountDataService.createAccount({
       accountNumber: +(new Date()),
-      clientNumber: +this.client.personalNumber,
-      accountType: account.accountType,
+      clientNumber: this.client.personalNumber,
+      accountType: account.accountType  ,
       currency: account.currency,
       accountStatus: AccountStatus.active,
-    }).subscribe(() => {
-      this.reloadPage();
     })
+      .pipe(switchMap(() => this.refreshData()))
+      .subscribe(() => {
+        this.isAccountLoading = false;
+      })
   }
 
-  public closeAccount(accountId: string) {
-    this.accountDataService.closeAccount(accountId).subscribe(() => {
-      this.reloadPage();
-    })
+  public closeAccount(account: Account) {
+    this.isAccountLoading = true;
+    this.accountDataService.closeAccount((account as any)._id)
+      .pipe(switchMap(() => this.refreshData()))
+      .subscribe(() => {
+        this.isAccountLoading = false;
+      })
   }
 
-  private reloadPage() {
-    window.location.reload()
+  private refreshData() {
+    return this.clientDetailsService
+      .getClientsDetails(this.client.id)
+      .pipe(
+        take(1),
+        tap(({ client, accounts }) => {
+          this.client = client;
+          this.accounts = accounts;
+        })
+      )
   }
 }

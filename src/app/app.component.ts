@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { filter, mapTo, merge, Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { filter, mapTo, merge, Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isLoading$: Observable<boolean>;
   private _showLoaderEvents$!: Observable<boolean>
   private _hideLoaderEvents$!: Observable<boolean>
